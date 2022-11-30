@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use Illuminate\Http\Request;
+use App\Http\Requests\GroupRequest;
 
 class GroupController extends Controller
 {
@@ -14,7 +15,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+  
+        return view ('groups.index');
     }
 
     /**
@@ -24,7 +26,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view ('groups.create');
     }
 
     /**
@@ -33,9 +35,13 @@ class GroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GroupRequest $request)
     {
-        //
+        $group = new Group();
+        $group->name = $request->input('name');
+        $group->save();
+
+        return redirect()->route('groups.index');
     }
 
     /**
