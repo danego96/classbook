@@ -15,8 +15,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-  
-        return view ('groups.index');
+        $group = new Group();
+        return view ('groups.index', ['data' => $group->paginate(10)]);
     }
 
     /**
@@ -52,7 +52,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        //
+       
     }
 
     /**
@@ -61,9 +61,10 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit($id)
     {
-        //
+        $group = new Group;
+        return view('groups.edit', ['data' => $group->find($id)]);
     }
 
     /**
@@ -73,10 +74,15 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(GroupRequest $request, $id)
     {
-        //
+        $group = Group::find($id);
+        $group->name = $request->input('name');
+        $group->save();
+
+               return redirect()->route('groups.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -84,8 +90,10 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group)
+    public function destroy($id)
     {
-        //
+        Group::find($id)->delete();
+
+        return redirect()->route('groups.index');
     }
 }
