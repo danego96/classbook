@@ -11,6 +11,7 @@
         <tr>
             <th scope="col">ФИО</th>
             <th scope="col">Группа</th>
+            <th scope="col">Редактировать</th>
           </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
         <tr>
           <td>{{ $el->last_name}} {{ $el->first_name}} {{ $el->middle_name}}</td>
           <td>{{ $el->group->name}}</td>
+          <td><a href="{{ route('students.edit', $el -> id) }}">Редактировать</a></td>
       </tr>
       @endforeach
         </tbody>

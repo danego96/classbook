@@ -70,9 +70,11 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit($id)
     {
-        //
+        $student = new Student;
+        $group = Group::all();
+        return view('students.edit', ['data' => $student->find($id),'select_group' => $group]);
     }
 
     /**
@@ -82,9 +84,17 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(StudentRequest $request, $id)
     {
-        //
+        $student = Student::find($id);
+        $student->last_name = $request->input('last_name');
+        $student->first_name = $request->input('first_name');
+        $student->middle_name = $request->input('middle_name');
+        $student->group_id = $request->input('group_id');
+        $student->birth_date = $request->input('birth_date');
+        $student->save();
+
+               return redirect()->route('students.index');
     }
 
     /**
@@ -93,8 +103,10 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function destroy($id)
     {
-        //
+        Student::find($id)->delete();
+
+        return redirect()->route('students.index');
     }
 }
