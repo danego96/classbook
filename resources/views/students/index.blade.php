@@ -16,7 +16,8 @@
         <tbody>
         @foreach($data as $el)
         <tr>
-       
+          <td>{{ $el->last_name}} {{ $el->first_name}} {{ $el->middle_name}}</td>
+          <td>{{ $el->group->name}}</td>
       </tr>
       @endforeach
         </tbody>

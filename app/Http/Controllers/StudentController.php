@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Http\Requests\StudentRequest;
 
@@ -27,7 +28,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view ('students.create');
+        $group = Group::all();
+        return view ('students.create', ['data'=>$group]);
 
     }
 
@@ -43,7 +45,7 @@ class StudentController extends Controller
         $student->last_name = $request->input('last_name');
         $student->first_name = $request->input('first_name');
         $student->middle_name = $request->input('middle_name');
-        $student->group_name = $request->input('group_name');
+        $student->group_id = $request->input('group_id');
         $student->birth_date = $request->input('birth_date');
 
         $student->save();

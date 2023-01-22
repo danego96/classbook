@@ -20,8 +20,13 @@
     <input type="text" name="middle_name" id="middle_name" class="form-control">
 </div>
 <div class="mb-3">
-    <label for="group_name" class="form-label">Группа</label>
-    <input type="text" name="group_name" id="имя" class="form-control">
+  <label for="group_id" class="form-label">Группа</label>
+    <select class="form-select" aria-label="Default select example" name="group_id">
+      <option selected>Выберите группу</option>
+        @foreach($data as $el)
+         <option name="group_id" value="{{$el->id}}">{{$el->name}}</option>
+        @endforeach
+  </select>
 </div>
 <div class="mb-3">
     <label for="birth_date" class="form-label">Дата рождения</label>
