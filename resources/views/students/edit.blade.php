@@ -25,9 +25,8 @@
 <div class="mb-3">
     <label for="group_id" class="form-label">Группа</label>
       <select class="form-select" aria-label="Default select example" name="group_id" value="{{$data-> group_id}}">
-        <option selected>{{$data-> group_id}}</option>
           @foreach($select_group as $selected)
-           <option name="group_id" value="{{$selected->id}}">{{$selected->name}}</option>
+              <option  @if ($data -> group_id == $selected->id) selected  @endif name="group_id" value="{{$selected->id}}">{{$selected->name}}</option>
           @endforeach
     </select>
   </div>
