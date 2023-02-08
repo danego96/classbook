@@ -18,7 +18,7 @@ class StudentController extends Controller
     public function index()
     {
         $student = new Student();
-        return view ('students.index', ['data' => $student->paginate(10)]);
+        return view ('students.index', ['data' => $student->Paginate(15)]);
     }
 
     /**

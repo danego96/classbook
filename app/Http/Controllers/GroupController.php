@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Http\Requests\GroupRequest;
+use App\Models\Student;
 
 class GroupController extends Controller
 {
@@ -48,11 +49,13 @@ class GroupController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Group  $group
-     * @return \Illuminate\Http\Response
+   `  * @return \Illuminate\Http\Response d
      */
-    public function show(Group $group)
+    public function show($id)
     {
-       
+       $group = new Group;
+       $student = Student::all();
+       return view('groups.show',['data' => $group->find($id), 'group_students' => $student]);
     }
 
     /**
