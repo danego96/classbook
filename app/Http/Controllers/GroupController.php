@@ -17,7 +17,7 @@ class GroupController extends Controller
     public function index()
     {
         $group = new Group();
-        return view ('groups.index', ['data' => $group->paginate(10)]);
+        return view('groups.index', ['data' => $group->paginate(10)]);
     }
 
     /**
@@ -27,7 +27,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view ('groups.create');
+        return view('groups.create');
     }
 
     /**
@@ -53,9 +53,9 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-       $group = new Group;
-       $student = Student::all();
-       return view('groups.show',['data' => $group->find($id), 'group_students' => $student]);
+        $group = new Group;
+        $student = Student::where('group_id', $id)->paginate(10);
+        return view('groups.show', ['data' => $group->find($id), 'group_students' => $student]);
     }
 
     /**
@@ -83,7 +83,7 @@ class GroupController extends Controller
         $group->name = $request->input('name');
         $group->save();
 
-               return redirect()->route('groups.index');
+        return redirect()->route('groups.index');
     }
 
 

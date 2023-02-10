@@ -15,15 +15,15 @@
         </thead>
         <tbody>
         @foreach($group_students as $group_student)
-        @if ($group_student -> group_id == $data->id)
         <tr>
           <td>{{ $group_student->last_name}} {{ $group_student->first_name}} {{ $group_student->middle_name}}</td>
           <td>{{ $group_student->group->name}}</td>
           <td><a href="{{ route('students.edit', $group_student -> id) }}">Редактировать</a></td>
       </tr>
-      @endif
       @endforeach
         </tbody>
       </table>
-
+      <div class="d-flex justify-content-center">
+        {{ $group_students->links() }}
+      </div>
 @endsection
