@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\MarkController;
 
 
 
@@ -26,3 +27,4 @@ Route::get('/', function () {
 Route::resource('groups', GroupController::class);
 Route::resource('students', StudentController::class);
 Route::resource('subjects', SubjectController::class);
+Route::resource('marks', MarkController::class);

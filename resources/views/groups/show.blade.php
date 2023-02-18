@@ -11,14 +11,16 @@
             <th scope="col">ФИО</th>
             <th scope="col">Группа</th>
             <th scope="col">Редактировать</th>
+            <th scope="col">Оценки студента</th>
           </tr>
         </thead>
         <tbody>
         @foreach($group_students as $group_student)
         <tr>
-          <td>{{ $group_student->last_name}} {{ $group_student->first_name}} {{ $group_student->middle_name}}</td>
+          <td>{{ $group_student->last_name}} {{ $group_student->first_name}}</td>
           <td>{{ $group_student->group->name}}</td>
           <td><a href="{{ route('students.edit', $group_student -> id) }}">Редактировать</a></td>
+          <td><a href="{{ route('students.show', $group_student -> id) }}">Оценки</a></td>
       </tr>
       @endforeach
         </tbody>

@@ -24,7 +24,7 @@ class MarkController extends Controller
      */
     public function create()
     {
-        //
+        return view ('marks.create');
     }
 
     /**

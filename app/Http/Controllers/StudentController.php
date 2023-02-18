@@ -6,7 +6,7 @@ use App\Models\Student;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Http\Requests\StudentRequest;
-
+use App\Models\Subject;
 
 class StudentController extends Controller
 {
@@ -59,9 +59,11 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($id)
     {
-        //
+        $subject = Subject::all();
+        $student = new Student();
+        return view('students.show', ['data' => $student->find($id), 'subject_data' => $subject]);
     }
 
     /**
