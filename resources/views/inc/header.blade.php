@@ -9,6 +9,7 @@
           <li><a href="/" class="nav-link px-2 text-secondary">Главная</a></li>
           <li><a href="{{ route('groups.index')}}" class="nav-link px-2 text-white">Список групп</a></li> 
           <li><a href="{{ route('students.index')}}" class="nav-link px-2 text-white">Список студентов</a></li> 
+          <li><a href="{{ route('subjects.index')}}" class="nav-link px-2 text-white">Предметы</a></li> 
         </ul>
       </div>
     </div>

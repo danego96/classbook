@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subject = new Subject();
+        return view('subjects.index', ['data' => $subject->paginate(10)]);    
     }
 
     /**
@@ -24,7 +26,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('subjects.create');
     }
 
     /**
@@ -33,9 +35,13 @@ class SubjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubjectRequest $request)
     {
-        //
+        $subject = new Subject();
+        $subject->name = $request->input('name');
+        $subject->save();
+
+        return redirect()->route('subjects.index');
     }
 
     /**
@@ -55,9 +61,10 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subject $subject)
+    public function edit($id)
     {
-        //
+        $subject = new Subject;
+        return view('subjects.edit', ['data' => $subject->find($id)]);
     }
 
     /**
@@ -67,9 +74,13 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subject $subject)
+    public function update(SubjectRequest $request, $id )
     {
-        //
+        $subject = Subject::find($id);
+        $subject->name = $request->input('name');
+        $subject->save();
+
+        return redirect()->route('subjects.index');
     }
 
     /**
@@ -78,8 +89,10 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subject $subject)
+    public function destroy($id)
     {
-        //
+        Subject::find($id)->delete();
+
+        return redirect()->route('subjects.index');
     }
 }
