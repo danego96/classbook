@@ -59,11 +59,10 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Student $student)
     {
-        $subject = Subject::all();
-        $student = new Student();
-        return view('students.show', ['data' => $student->find($id), 'subject_data' => $subject]);
+        $group = Group::all();
+        return view('students.show', ['data' => $student, 'select_group' => $group]);
     }
 
     /**

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mark;
+use App\Models\Student;
+use App\Models\Subject;
 use Illuminate\Http\Request;
+use App\Http\Requests\MarkRequest;
+use App\Http\Requests\StudentRequest;
 
 class MarkController extends Controller
 {
@@ -12,9 +16,11 @@ class MarkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Student $student)
     {
-        //
+        $subject = Subject::all();
+        $mark = Mark::all();
+        return view('marks.index', [ 'subject_data' => $subject, 'data' => $student, 'mark_data' => $mark] );
     }
 
     /**
@@ -22,9 +28,11 @@ class MarkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Student $student)
     {
-        return view ('marks.create');
+        $subject = Subject::all();
+        $mark = range(1,5);
+        return view('marks.create', ['mark_list' => $mark, 'subject_data' => $subject, 'data' => $student] );
     }
 
     /**
@@ -33,9 +41,16 @@ class MarkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MarkRequest $request, Student $student)
     {
-        //
+        $mark = new Mark();
+        $mark->subject_id = $request->input('subject_id');
+        $mark->mark = $request->input('mark');
+        $mark ->student_id = $student->id;
+
+        $mark->save();
+
+        return redirect()->route('students.marks.index', $student);
     }
 
     /**

@@ -16,7 +16,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $group = new Group();
+        $group = new Group;
         return view('groups.index', ['data' => $group->paginate(10)]);
     }
 
